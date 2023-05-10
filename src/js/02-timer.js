@@ -42,7 +42,6 @@ const options = {
         window.alert("Please choose a date in the future");
     }else {
       startBtn.disabled = false;
-
     }
   },
 };
@@ -62,6 +61,7 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 };
+
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 };
@@ -77,7 +77,6 @@ function handleTimer() {
   minutesLeft.textContent = addLeadingZero(minutes);
   secondsLeft.textContent = addLeadingZero(seconds);
 };
-
 
 startBtn.addEventListener('click', () => {
     setInterval(handleTimer, 1000);
