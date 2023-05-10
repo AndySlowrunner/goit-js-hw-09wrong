@@ -35,7 +35,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    currentDate = options.defaultDate.getTime();
+    const currentDate = options.defaultDate.getTime();
     userDate = selectedDates[0].getTime();
   
     if (userDate <= currentDate) {
@@ -71,7 +71,6 @@ function handleTimer() {
   const timeDifference = userDate - currentDate;
   const timeConvert = convertMs(timeDifference);
   const { days, hours, minutes, seconds } = timeConvert;
-  console.log(timeConvert);
   daysLeft.textContent = addLeadingZero(days);
   hoursLeft.textContent = addLeadingZero(hours);
   minutesLeft.textContent = addLeadingZero(minutes);
