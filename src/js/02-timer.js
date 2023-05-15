@@ -2,6 +2,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
 const startBtn = document.querySelector('button[data-start]');
+const input = document.getElementById('datetime-picker');
 const fields = document.querySelectorAll('.field');
 const timerEl = document.querySelector('.timer');
 const spanEl = document.querySelectorAll('.value');
@@ -37,11 +38,15 @@ const options = {
   onClose(selectedDates) {
     const currentDate = options.defaultDate.getTime();
     userDate = selectedDates[0].getTime();
-  
+    function disableInput() {
+      input.disabled = true;
+    };
+    
     if (userDate <= currentDate) {
-        window.alert("Please choose a date in the future");
+      window.alert("Please choose a date in the future");
     }else {
       startBtn.disabled = false;
+      disableInput();
     }
   },
 };
@@ -66,7 +71,7 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 };
 
-function handleTimer() {
+function updateFaceClock() {
   const currentDate = new Date();
   const timeDifference = userDate - currentDate;
   const timeConvert = convertMs(timeDifference);
@@ -78,5 +83,12 @@ function handleTimer() {
 };
 
 startBtn.addEventListener('click', () => {
-    setInterval(handleTimer, 1000);
+  timerId = setInterval(() => {
+    updateFaceClock();
+    let deltaTime = userDate - Date.now();
+    if (deltaTime < 1000) {
+      clearInterval(timerId);
+    }
+  }, 1000);
+  startBtn.disabled = true;
 });
