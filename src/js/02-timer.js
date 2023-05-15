@@ -88,7 +88,7 @@ startBtn.addEventListener('click', () => {
     let deltaTime = userDate - Date.now();
     if (deltaTime < 1000) {
       clearInterval(timerId);
-    }
+    };
   }, 1000);
   startBtn.disabled = true;
 });
